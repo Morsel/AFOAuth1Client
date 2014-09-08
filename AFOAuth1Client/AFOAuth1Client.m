@@ -12,6 +12,7 @@
 
 static NSString * const kAFOAuth1Version = @"1.0";
 NSString * const kAFApplicationLaunchedWithURLNotification = @"kAFApplicationLaunchedWithURLNotification";
+NSString * const kAFOAuthClientErrorDomain = @"com.alamofire.error.AFOAuth1Client";
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 NSString * const kAFApplicationLaunchOptionsURLKey = @"UIApplicationLaunchOptionsURLKey";
 #else
@@ -412,7 +413,7 @@ static NSDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *identifi
 		[manager.operationQueue addOperation:operation];
     } else {
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:NSLocalizedStringFromTable(@"Bad OAuth response received from the server.", @"AFNetworking", nil) forKey:NSLocalizedFailureReasonErrorKey];
-        NSError *error = [[NSError alloc] initWithDomain:AFNetworkingErrorDomain code:NSURLErrorBadServerResponse userInfo:userInfo];
+        NSError *error = [[NSError alloc] initWithDomain:kAFOAuthClientErrorDomain code:NSURLErrorBadServerResponse userInfo:userInfo];
         failure(error);
     }
 }
